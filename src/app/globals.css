@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+:root {
+  --background: #000000;
+  --foreground: #e8e8ed;
+  --card: #111111;
+  --card-hover: #191919;
+  --card-border: #1a1a1a;
+  --muted: #888888;
+  --muted-foreground: #555555;
+  --accent: #6366f1;
+  --accent-hover: #818cf8;
+  --accent-subtle: rgba(99, 102, 241, 0.12);
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --surface: #0a0a0a;
+  --input-bg: #111111;
+  --input-border: #222222;
+  --sidebar-bg: #000000;
+  --sidebar-border: #141414;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-hover: var(--card-hover);
+  --color-card-border: var(--card-border);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-surface: var(--surface);
+  --color-input-bg: var(--input-bg);
+  --color-input-border: var(--input-border);
+  --color-sidebar-bg: var(--sidebar-bg);
+  --color-sidebar-border: var(--sidebar-border);
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.08) transparent;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s ease-out forwards;
+}
+
+/* Project card preview gradients */
+.preview-1 {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.preview-2 {
+  background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #1a1a2e 100%);
+}
+
+.preview-3 {
+  background: linear-gradient(135deg, #0a1a2e 0%, #1a2a3e 50%, #0a2a4e 100%);
+}
+
+.preview-4 {
+  background: linear-gradient(135deg, #1a2e1a 0%, #1e3a1e 50%, #0a2e0a 100%);
+}
+
+.preview-5 {
+  background: linear-gradient(135deg, #2e1a1a 0%, #3e2121 50%, #2e0a0a 100%);
+}
+
+.preview-6 {
+  background: linear-gradient(135deg, #2e2e1a 0%, #3e3a1e 50%, #2e2a0a 100%);
+}
+
+.preview-7 {
+  background: linear-gradient(135deg, #1a2e2e 0%, #1e3a3a 50%, #0a2e2e 100%);
+}
+
+.preview-8 {
+  background: linear-gradient(135deg, #2e1a2e 0%, #3a1e3a 50%, #2e0a2e 100%);
+}
