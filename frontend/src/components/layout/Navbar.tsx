@@ -16,7 +16,7 @@ import {
     Zap,
     Crown,
 } from "lucide-react";
-import { mockUser } from "@/lib/data";
+import { mockUser } from "../../lib/data";
 
 const navLinks = [
     { href: "/", label: "Home", icon: Home },

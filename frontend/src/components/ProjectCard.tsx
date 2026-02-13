@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { MoreHorizontal, ExternalLink, Globe } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
-import type { Project } from "@/lib/data";
+import type { Project } from "../lib/data";
 
 interface ProjectCardProps {
     project: Project;
@@ -130,8 +130,8 @@ export function ProjectCard({ project, index }: ProjectCardProps) {
                                     <button
                                         key={action}
                                         className={`w-full text-left px-3 py-2 text-xs transition-colors cursor-pointer ${action === "Delete"
-                                                ? "text-red-400 hover:bg-red-400/10"
-                                                : "text-muted hover:text-foreground hover:bg-white/[0.04]"
+                                            ? "text-red-400 hover:bg-red-400/10"
+                                            : "text-muted hover:text-foreground hover:bg-white/[0.04]"
                                             }`}
                                     >
                                         {action}

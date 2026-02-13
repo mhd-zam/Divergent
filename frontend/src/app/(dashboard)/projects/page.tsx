@@ -3,8 +3,8 @@
 import { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { Search, LayoutGrid, List } from "lucide-react";
-import { ProjectCard } from "@/components/ProjectCard";
-import { mockProjects, type ProjectStatus } from "@/lib/data";
+import { ProjectCard } from "../../../components/ProjectCard";
+import { mockProjects, type ProjectStatus } from "../../../lib/data";
 
 const filters: { label: string; value: ProjectStatus | "all" }[] = [
     { label: "All", value: "all" },
@@ -57,8 +57,8 @@ export default function ProjectsPage() {
                             key={f.value}
                             onClick={() => setActiveFilter(f.value)}
                             className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all cursor-pointer ${activeFilter === f.value
-                                    ? "bg-white/[0.1] text-foreground"
-                                    : "text-muted-foreground hover:text-muted hover:bg-white/[0.04]"
+                                ? "bg-white/[0.1] text-foreground"
+                                : "text-muted-foreground hover:text-muted hover:bg-white/[0.04]"
                                 }`}
                         >
                             {f.label}
@@ -117,10 +117,10 @@ export default function ProjectsPage() {
                                 <span className="text-xs text-muted-foreground shrink-0">{project.lastEdited}</span>
                                 <span
                                     className={`text-xs font-medium px-2 py-0.5 rounded-md shrink-0 ${project.status === "deployed"
-                                            ? "bg-green-500/10 text-green-400"
-                                            : project.status === "developing"
-                                                ? "bg-yellow-500/10 text-yellow-400"
-                                                : "bg-white/[0.05] text-muted-foreground"
+                                        ? "bg-green-500/10 text-green-400"
+                                        : project.status === "developing"
+                                            ? "bg-yellow-500/10 text-yellow-400"
+                                            : "bg-white/[0.05] text-muted-foreground"
                                         }`}
                                 >
                                     {project.status.charAt(0).toUpperCase() + project.status.slice(1)}

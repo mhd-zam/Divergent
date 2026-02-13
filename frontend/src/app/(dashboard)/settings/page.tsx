@@ -12,7 +12,7 @@ import {
     Crown,
     ExternalLink,
 } from "lucide-react";
-import { mockUser } from "@/lib/data";
+import { mockUser } from "../../../lib/data";
 
 const tabs = [
     { label: "Profile", icon: User },
@@ -40,8 +40,8 @@ export default function SettingsPage() {
                         key={tab.label}
                         onClick={() => setActiveTab(tab.label)}
                         className={`flex items-center gap-1.5 px-4 py-2.5 text-xs font-medium border-b-2 -mb-px transition-colors cursor-pointer ${activeTab === tab.label
-                                ? "text-foreground border-accent"
-                                : "text-muted-foreground border-transparent hover:text-muted"
+                            ? "text-foreground border-accent"
+                            : "text-muted-foreground border-transparent hover:text-muted"
                             }`}
                     >
                         <tab.icon className="w-3.5 h-3.5" />

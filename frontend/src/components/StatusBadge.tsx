@@ -1,5 +1,5 @@
 import { CheckCircle2, Loader2, FileText } from "lucide-react";
-import type { ProjectStatus } from "@/lib/data";
+import type { ProjectStatus } from "../lib/data";
 
 const statusConfig = {
     deployed: {

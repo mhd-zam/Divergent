@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import type { FAQItem } from "@/lib/data";
+import type { FAQItem } from "../lib/data";
 
 export function FAQ({ items }: { items: FAQItem[] }) {
     const [openIndex, setOpenIndex] = useState<number | null>(0);

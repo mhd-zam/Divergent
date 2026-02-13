@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChatInput } from "@/components/ChatInput";
-import { ProjectCard } from "@/components/ProjectCard";
-import { mockProjects } from "@/lib/data";
+import { ChatInput } from "../../components/ChatInput";
+import { ProjectCard } from "../../components/ProjectCard";
+import { mockProjects } from "../../lib/data";
 import { Sparkles, Zap, Code2, Rocket, Clock } from "lucide-react";
 
 const suggestions = [

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
-import type { PricingPlan } from "@/lib/data";
+import type { PricingPlan } from "../lib/data";
 
 interface PricingCardProps {
     plan: PricingPlan;
@@ -20,8 +20,8 @@ export function PricingCard({ plan, annual, index }: PricingCardProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: index * 0.1 }}
             className={`relative rounded-xl p-5 flex flex-col ${plan.popular
-                    ? "bg-card border-2 border-accent/40"
-                    : "bg-card border border-card-border"
+                ? "bg-card border-2 border-accent/40"
+                : "bg-card border border-card-border"
                 }`}
         >
             {plan.popular && (
@@ -56,8 +56,8 @@ export function PricingCard({ plan, annual, index }: PricingCardProps) {
 
             <button
                 className={`w-full py-2.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${plan.popular
-                        ? "bg-accent text-white hover:bg-accent-hover"
-                        : "bg-white/[0.06] text-foreground hover:bg-white/[0.1] border border-card-border"
+                    ? "bg-accent text-white hover:bg-accent-hover"
+                    : "bg-white/[0.06] text-foreground hover:bg-white/[0.1] border border-card-border"
                     }`}
             >
                 {plan.cta}

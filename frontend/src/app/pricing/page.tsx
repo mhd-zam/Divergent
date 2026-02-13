@@ -4,9 +4,9 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowLeft, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { PricingCard } from "@/components/PricingCard";
-import { FAQ } from "@/components/FAQ";
-import { pricingPlans, faqData } from "@/lib/data";
+import { PricingCard } from "../../components/PricingCard";
+import { FAQ } from "../../components/FAQ";
+import { pricingPlans, faqData } from "../../lib/data";
 
 export default function PricingPage() {
     const [annual, setAnnual] = useState(true);
