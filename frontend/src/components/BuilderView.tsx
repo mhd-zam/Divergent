@@ -70,7 +70,7 @@ export function BuilderView({
     }, [streamingCode, isComplete]);
 
     return (
-        <div className="w-full h-[calc(100vh-100px)] min-h-[600px] flex flex-col lg:flex-row gap-4 p-2">
+        <div className="w-full h-full flex flex-col lg:flex-row gap-4">
             {/* Left Panel: Agent Log & Terminal */}
             <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -100,7 +100,7 @@ export function BuilderView({
                                         <Circle className="w-5 h-5 text-muted-foreground/30" />
                                     )}
                                     {idx < steps.length - 1 && (
-                                        <div className={`absolute top-5 w-[1px] h-3 ${step.status === 'completed' ? 'bg-green-500/50' : 'bg-muted-foreground/20'}`} />
+                                        <div className={`absolute top-5 w-px h-3 ${step.status === 'completed' ? 'bg-green-500/50' : 'bg-muted-foreground/20'}`} />
                                     )}
                                 </div>
                                 <span className={`text-xs ${step.status === 'running' ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>
@@ -148,13 +148,13 @@ export function BuilderView({
                     <div className="flex bg-muted/20 p-1 rounded-lg">
                         <button
                             onClick={() => setActiveTab('preview')}
-                            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${activeTab === 'preview' ? 'bg-white shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+                            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${activeTab === 'preview' ? 'bg-white shadow-sm text-black' : 'text-muted-foreground hover:text-foreground'}`}
                         >
                             Preview
                         </button>
                         <button
                             onClick={() => setActiveTab('code')}
-                            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${activeTab === 'code' ? 'bg-white shadow-sm text-foreground' : 'text-muted-foreground hover:text-foreground'}`}
+                            className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${activeTab === 'code' ? 'bg-white shadow-sm text-black' : 'text-muted-foreground hover:text-foreground'}`}
                         >
                             <Code className="w-3.5 h-3.5 inline mr-1.5" />
                             Source

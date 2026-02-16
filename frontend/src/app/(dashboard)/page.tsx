@@ -83,7 +83,7 @@ export default function HomePage() {
     };
 
     return (
-        <div className={viewState === 'hero' ? "space-y-12" : "h-[calc(100vh-80px)]"}>
+        <div className={viewState === 'hero' ? "max-w-5xl mx-auto px-6 py-12 space-y-12" : "h-[calc(100vh-56px)] overflow-hidden"}>
             <AnimatePresence mode="wait">
                 {viewState === 'hero' ? (
                     <motion.div
@@ -209,20 +209,27 @@ export default function HomePage() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 20 }}
                         transition={{ duration: 0.4 }}
-                        className="w-full h-full"
+                        className="w-full h-full flex flex-col"
                     >
-                        <div className="mb-4 flex items-center gap-2 text-sm text-muted-foreground px-2">
-                            <span className="opacity-50">Building:</span>
-                            <span className="font-medium text-foreground">"{prompt}"</span>
+                        <div className="h-10 border-b border-white/5 flex items-center justify-between px-4 bg-background/50 backdrop-blur-sm">
+                            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                                <span className="opacity-50 text-xs uppercase tracking-wider font-semibold">Project</span>
+                                <span className="font-medium bg-accent/10 text-accent px-2 py-0.5 rounded text-xs select-all">"{prompt}"</span>
+                            </div>
+                            <div className="flex gap-2">
+                                <button onClick={handleRestart} className="text-xs hover:text-foreground text-muted-foreground transition-colors">Close</button>
+                            </div>
                         </div>
-                        <BuilderView
-                            prompt={prompt}
-                            streamingCode={streamingCode}
-                            isComplete={!loading && !!response}
-                            response={response}
-                            onDownload={handleDownload}
-                            onRestart={handleRestart}
-                        />
+                        <div className="flex-1 overflow-hidden p-2">
+                            <BuilderView
+                                prompt={prompt}
+                                streamingCode={streamingCode}
+                                isComplete={!loading && !!response}
+                                response={response}
+                                onDownload={handleDownload}
+                                onRestart={handleRestart}
+                            />
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>
