@@ -62,8 +62,8 @@ export function ChatInput({
         >
             <div
                 className={`rounded-2xl bg-card border-2 transition-all duration-300 ${focused
-                        ? "border-accent/50 shadow-[0_0_40px_rgba(99,102,241,0.1),0_0_80px_rgba(99,102,241,0.04)]"
-                        : "border-card-border shadow-lg shadow-black/10"
+                    ? "border-accent/50 shadow-[0_0_40px_rgba(99,102,241,0.1),0_0_80px_rgba(99,102,241,0.04)]"
+                    : "border-card-border shadow-lg shadow-black/10"
                     }`}
             >
                 {/* Textarea */}

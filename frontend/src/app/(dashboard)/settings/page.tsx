@@ -24,7 +24,7 @@ export default function SettingsPage() {
     const [activeTab, setActiveTab] = useState("Profile");
 
     return (
-        <div className="space-y-6 max-w-2xl">
+        <div className="max-w-2xl mx-auto px-6 py-12 space-y-6">
             <motion.h1
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

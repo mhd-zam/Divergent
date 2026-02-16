@@ -29,7 +29,7 @@ export default function ProjectsPage() {
     }, [search, activeFilter]);
 
     return (
-        <div className="space-y-6">
+        <div className="max-w-5xl mx-auto px-6 py-12 space-y-6">
             {/* Header */}
             <motion.div
                 initial={{ opacity: 0 }}

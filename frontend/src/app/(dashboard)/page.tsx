@@ -209,7 +209,7 @@ export default function HomePage() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 20 }}
                         transition={{ duration: 0.4 }}
-                        className="w-full h-full flex flex-col"
+                        className="w-full h-full flex flex-col p-14"
                     >
                         <div className="h-10 border-b border-white/5 flex items-center justify-between px-4 bg-background/50 backdrop-blur-sm">
                             <div className="flex items-center gap-2 text-sm text-muted-foreground">
@@ -220,7 +220,7 @@ export default function HomePage() {
                                 <button onClick={handleRestart} className="text-xs hover:text-foreground text-muted-foreground transition-colors">Close</button>
                             </div>
                         </div>
-                        <div className="flex-1 overflow-hidden p-2">
+                        <div className="flex-1 overflow-hidden">
                             <BuilderView
                                 prompt={prompt}
                                 streamingCode={streamingCode}
