@@ -1,0 +1,32 @@
+# System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor Configs
+.vscode/
+.idea/
+*.suo
+*.ntvs
+*.njsproj
+*.sln
+*.sw?
+
+# Dependencies (just in case)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Build Output
+dist/
+build/
+out/
+
+# Environment Variables
+.env
+.env.local
+.env.*.local
+
+# Temporary Files
+tmp/
+temp/
