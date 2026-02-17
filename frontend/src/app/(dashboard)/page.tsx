@@ -82,6 +82,11 @@ export default function HomePage() {
         setLoading(false);
     };
 
+    const handleChatSubmit = (message: string) => {
+        console.log("Chat refinement:", message);
+        // TODO: Send refinement message to backend
+    };
+
     return (
         <div className={viewState === 'hero' ? "max-w-5xl mx-auto px-6 py-12 space-y-12" : "h-[calc(100vh-56px)] overflow-hidden"}>
             <AnimatePresence mode="wait">
@@ -228,6 +233,7 @@ export default function HomePage() {
                                 response={response}
                                 onDownload={handleDownload}
                                 onRestart={handleRestart}
+                                onChatSubmit={handleChatSubmit}
                             />
                         </div>
                     </motion.div>

@@ -150,3 +150,33 @@ body {
 .preview-8 {
   background: linear-gradient(135deg, #2e1a2e 0%, #3a1e3a 50%, #2e0a2e 100%);
 }
+
+/* Thinking stream cursor */
+@keyframes blink-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.thinking-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 14px;
+  background: var(--accent);
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink-cursor 0.8s ease-in-out infinite;
+}
+
+/* Chat message bubbles */
+.chat-bubble-user {
+  background: var(--accent);
+  color: white;
+  border-radius: 16px 16px 4px 16px;
+}
+
+.chat-bubble-ai {
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  color: var(--foreground);
+  border-radius: 16px 16px 16px 4px;
+}
