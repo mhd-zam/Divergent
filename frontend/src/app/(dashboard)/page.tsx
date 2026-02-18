@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { ChatInput } from "../../components/ChatInput";
 import { ProjectCard } from "../../components/ProjectCard";
+import { BackgroundAnimation } from "../../components/BackgroundAnimation";
 import { BuilderView } from "../../components/BuilderView";
 import { mockProjects } from "../../lib/data";
 import { Sparkles, Zap, Code2, Rocket, Clock } from "lucide-react";
@@ -89,6 +90,7 @@ export default function HomePage() {
 
     return (
         <div className={viewState === 'hero' ? "max-w-5xl mx-auto px-6 py-12 space-y-12" : "h-[calc(100vh-56px)] overflow-hidden"}>
+            {viewState === 'hero' && <BackgroundAnimation />}
             <AnimatePresence mode="wait">
                 {viewState === 'hero' ? (
                     <motion.div
@@ -97,7 +99,8 @@ export default function HomePage() {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
                         transition={{ duration: 0.3 }}
-                        className="space-y-12"
+                        className="space-y-12 relative"
+                        style={{ zIndex: 1 }}
                     >
                         {/* ─── Hero ─── */}
                         <div className="max-w-2xl mx-auto text-center pt-10">
