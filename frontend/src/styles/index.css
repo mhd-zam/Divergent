@@ -1,0 +1,339 @@
+@import "tailwindcss";
+
+/* ========================================
+   DIVERGENT — Design Tokens
+   "Soft Midnight Studio" Theme
+   ======================================== */
+
+@theme {
+    /* Color Palette */
+    --color-bg-primary: #1C1C24;
+    --color-bg-secondary: #24242E;
+    --color-bg-elevated: #2C2C38;
+    --color-bg-input: #20202A;
+
+    --color-border-subtle: rgba(255, 255, 255, 0.08);
+    --color-border-strong: rgba(255, 255, 255, 0.14);
+
+    --color-text-primary: #E4E2DE;
+    --color-text-secondary: #9494A4;
+    --color-text-tertiary: #6A6A7A;
+
+    --color-accent: #818CF8;
+    --color-accent-hover: #6366F1;
+    --color-accent-muted: rgba(129, 140, 248, 0.10);
+    --color-accent-secondary: #F9A85C;
+
+    --color-error: #F87171;
+    --color-success: #4ADE80;
+
+    /* Typography Scale (1.25 ratio) */
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'Fira Code', 'JetBrains Mono', ui-monospace, monospace;
+
+    --text-xs: 0.64rem;
+    --text-sm: 0.8rem;
+    --text-base: 1rem;
+    --text-lg: 1.25rem;
+    --text-xl: 1.563rem;
+    --text-2xl: 1.953rem;
+    --text-3xl: 2.441rem;
+    --text-4xl: 3.052rem;
+
+    /* Spacing */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.2), 0 8px 24px rgba(0, 0, 0, 0.15);
+    --shadow-elevated: 0 2px 4px rgba(0, 0, 0, 0.25), 0 12px 32px rgba(0, 0, 0, 0.2);
+    --shadow-glow-accent: 0 0 20px rgba(129, 140, 248, 0.15), 0 0 40px rgba(129, 140, 248, 0.05);
+    --shadow-glow-success: 0 0 8px rgba(74, 222, 128, 0.3);
+
+    /* Animations */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --duration-fast: 150ms;
+    --duration-normal: 200ms;
+    --duration-slow: 300ms;
+    --duration-entrance: 500ms;
+}
+
+/* ========================================
+   Global Base Styles
+   ======================================== */
+
+html {
+    font-family: var(--font-sans);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+/* Subtle grain texture overlay */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/* Selection */
+::selection {
+    background-color: rgba(129, 140, 248, 0.3);
+    color: var(--color-text-primary);
+}
+
+/* Focus ring */
+*:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* ========================================
+   Keyframe Animations
+   ======================================== */
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slide-in-left {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-in-right {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 4px rgba(74, 222, 128, 0.4), 0 0 8px rgba(74, 222, 128, 0.2);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 8px rgba(74, 222, 128, 0.6), 0 0 16px rgba(74, 222, 128, 0.3);
+        transform: scale(1.15);
+    }
+}
+
+@keyframes pulse-glow-error {
+
+    0%,
+    100% {
+        box-shadow: 0 0 4px rgba(248, 113, 113, 0.4), 0 0 8px rgba(248, 113, 113, 0.2);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 8px rgba(248, 113, 113, 0.6), 0 0 16px rgba(248, 113, 113, 0.3);
+        transform: scale(1.15);
+    }
+}
+
+@keyframes blink-cursor {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ========================================
+   Utility Classes
+   ======================================== */
+
+.animate-fade-in-up {
+    animation: fade-in-up var(--duration-entrance) var(--ease-out-expo) both;
+}
+
+.animate-fade-in {
+    animation: fade-in var(--duration-normal) ease-out both;
+}
+
+.animate-slide-in-left {
+    animation: slide-in-left var(--duration-slow) var(--ease-out-expo) both;
+}
+
+.animate-slide-in-right {
+    animation: slide-in-right var(--duration-slow) var(--ease-out-expo) both;
+}
+
+.animation-delay-1 {
+    animation-delay: 50ms;
+}
+
+.animation-delay-2 {
+    animation-delay: 100ms;
+}
+
+.animation-delay-3 {
+    animation-delay: 150ms;
+}
+
+.animation-delay-4 {
+    animation-delay: 200ms;
+}
+
+.animation-delay-5 {
+    animation-delay: 250ms;
+}
+
+.animation-delay-6 {
+    animation-delay: 300ms;
+}
+
+/* Frosted glass panel */
+.glass-panel {
+    background: rgba(28, 28, 36, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ========================================
+   highlight.js Theme Override — Soft Midnight
+   ======================================== */
+
+.hljs {
+    background: transparent !important;
+    color: var(--color-text-primary) !important;
+    font-family: var(--font-mono) !important;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-built_in {
+    color: #C792EA;
+}
+
+.hljs-string,
+.hljs-attribute {
+    color: #C3E88D;
+}
+
+.hljs-number,
+.hljs-literal {
+    color: #F78C6C;
+}
+
+.hljs-comment {
+    color: #546E7A;
+    font-style: italic;
+}
+
+.hljs-tag {
+    color: #F07178;
+}
+
+.hljs-attr {
+    color: #FFCB6B;
+}
+
+.hljs-name {
+    color: #F07178;
+}
+
+.hljs-title,
+.hljs-section {
+    color: #82AAFF;
+}
+
+.hljs-type {
+    color: #FFCB6B;
+}
