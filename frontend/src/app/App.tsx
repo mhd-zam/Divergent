@@ -1,79 +1,75 @@
 import React, { useState } from 'react';
 import { PromptWorkspace } from '../features/prompt';
 import { usePromptStore } from '../features/prompt';
-import { PreviewPanel } from '../features/preview';
 import { HistorySidebar } from '../features/history';
 import { SettingsDrawer } from '../features/settings';
 import { useSettingsStore } from '../features/settings';
-import { useHealthCheck } from '../shared/hooks/useHealthCheck';
-import { IconButton } from '../shared/ui';
+import { IconButton, ResizablePanels } from '../shared/ui';
+import { RightPanel } from '../features/prompt/components/RightPanel';
 
 const App: React.FC = () => {
     const [settingsOpen, setSettingsOpen] = useState(false);
     const { sidebarOpen, toggleSidebar } = useSettingsStore();
-    const { isConnected } = useHealthCheck();
-    const { showPreview, generatedCode, previewFullscreen, setShowPreview, setPreviewFullscreen } =
-        usePromptStore();
 
-    // Get the latest generated code from the stream via the prompt workspace
-    // We need the chunks from the useStream hook, but since PromptWorkspace manages it,
-    // we'll get the code from the last completed generation via history or direct state
-    const chunks = usePromptStore((s) => s.generatedCode);
+    const generatedCode = usePromptStore((s) => s.generatedCode);
+    const isStreaming = usePromptStore((s) => s.isStreaming);
+
+    const isActive = !!(generatedCode || isStreaming);
 
     return (
         <div className="h-screen flex flex-col bg-bg-primary overflow-hidden">
             {/* Top Bar */}
-            <header className="shrink-0 h-13 flex items-center justify-between px-4 border-b border-border-subtle bg-bg-secondary/80 backdrop-blur-sm z-30 animate-fade-in-up">
-                {/* Left: Logo + sidebar toggle */}
+            <header className="shrink-0 h-14 flex items-center justify-between px-6 border-b border-border-subtle bg-bg-secondary/60 backdrop-blur-md z-30 animate-fade-in-up">
+                {/* Left: Home */}
                 <div className="flex items-center gap-3">
-                    {!sidebarOpen && (
-                        <IconButton size="sm" tooltip="Open sidebar" onClick={toggleSidebar}>
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <line x1="3" y1="12" x2="21" y2="12" />
-                                <line x1="3" y1="6" x2="21" y2="6" />
-                                <line x1="3" y1="18" x2="21" y2="18" />
-                            </svg>
-                        </IconButton>
-                    )}
-                    <div className="flex items-center gap-2">
-                        <div className="w-7 h-7 rounded-lg bg-accent/20 flex items-center justify-center">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-accent" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M12 3l1.912 5.813a2 2 0 001.275 1.275L21 12l-5.813 1.912a2 2 0 00-1.275 1.275L12 21l-1.912-5.813a2 2 0 00-1.275-1.275L3 12l5.813-1.912a2 2 0 001.275-1.275L12 3z" />
-                            </svg>
-                        </div>
-                        <span className="text-base font-bold text-text-primary tracking-tight">
-                            Divergent
-                        </span>
-                    </div>
+                    <button className="flex items-center gap-2 px-3 py-1.5 rounded-lg hover:bg-white/5 transition-colors text-text-primary font-medium text-sm">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-text-secondary">
+                            <rect x="3" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="3" width="7" height="7"></rect>
+                            <rect x="14" y="14" width="7" height="7"></rect>
+                            <rect x="3" y="14" width="7" height="7"></rect>
+                        </svg>
+                        Home
+                    </button>
                 </div>
 
-                {/* Right: Health + Settings */}
+                {/* Right: Actions */}
                 <div className="flex items-center gap-3">
-                    {/* Health indicator */}
-                    <div className="flex items-center gap-2" title={isConnected ? 'Backend connected' : 'Backend disconnected'}>
-                        <span
-                            className={`w-2 h-2 rounded-full ${isConnected
-                                    ? 'bg-success animate-[pulse-glow_1.5s_ease-in-out_infinite]'
-                                    : 'bg-error animate-[pulse-glow-error_1.5s_ease-in-out_infinite]'
-                                }`}
-                            aria-label={isConnected ? 'Connected' : 'Disconnected'}
-                        />
-                        <span className="text-xs text-text-tertiary hidden sm:block">
-                            {isConnected ? 'Connected' : 'Disconnected'}
-                        </span>
-                    </div>
+                    {/* Buy Credits Button */}
+                    <button className="btn-gold-glow flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold mr-2">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Buy Credits
+                    </button>
 
-                    {/* Settings */}
-                    <IconButton
-                        size="sm"
-                        tooltip="Settings"
-                        onClick={() => setSettingsOpen(true)}
-                    >
+                    {/* Notification Icon */}
+                    <IconButton size="sm" tooltip="Notifications">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <circle cx="12" cy="12" r="3" />
-                            <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06A1.65 1.65 0 0019.32 9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z" />
+                            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
                         </svg>
                     </IconButton>
+
+                    {/* Gift Icon */}
+                    <IconButton size="sm" tooltip="Rewards">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+                            <rect x="2" y="7" width="20" height="5"></rect>
+                            <line x1="12" y1="22" x2="12" y2="7"></line>
+                            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+                            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+                        </svg>
+                    </IconButton>
+
+                    {/* Profile Avatar / Settings */}
+                    <button
+                        onClick={() => setSettingsOpen(true)}
+                        className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-white/20 transition-colors ml-1"
+                    >
+                        <span className="text-xs font-bold font-mono">tt</span>
+                    </button>
                 </div>
             </header>
 
@@ -84,17 +80,26 @@ const App: React.FC = () => {
 
                 {/* Workspace */}
                 <main className="flex-1 flex flex-col min-w-0 overflow-hidden">
-                    {showPreview && chunks ? (
-                        <PreviewPanel
-                            code={chunks}
-                            isFullscreen={previewFullscreen}
-                            onClose={() => {
-                                setShowPreview(false);
-                                setPreviewFullscreen(false);
-                            }}
-                            onToggleFullscreen={() => setPreviewFullscreen(!previewFullscreen)}
+                    {isActive ? (
+                        /* Split layout: Left = Prompt + AI thinking, Right = Preview/Code */
+                        <ResizablePanels
+                            left={
+                                <div className="flex-1 flex flex-col p-4 overflow-y-auto h-full">
+                                    <PromptWorkspace />
+                                </div>
+                            }
+                            right={
+                                <RightPanel
+                                    code={generatedCode}
+                                    isStreaming={isStreaming}
+                                />
+                            }
+                            defaultLeftWidth={45}
+                            minLeftWidth={25}
+                            maxLeftWidth={70}
                         />
                     ) : (
+                        /* Home view */
                         <div className="flex-1 flex flex-col p-6 overflow-y-auto">
                             <PromptWorkspace />
                         </div>

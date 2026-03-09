@@ -3,6 +3,7 @@ import { create } from 'zustand';
 interface PromptState {
     currentPrompt: string;
     generatedCode: string;
+    thinkingText: string;
     isStreaming: boolean;
     error: string | null;
     showPreview: boolean;
@@ -10,6 +11,7 @@ interface PromptState {
 
     setCurrentPrompt: (prompt: string) => void;
     setGeneratedCode: (code: string) => void;
+    setThinkingText: (text: string) => void;
     appendChunk: (chunk: string) => void;
     setIsStreaming: (isStreaming: boolean) => void;
     setError: (error: string | null) => void;
@@ -21,6 +23,7 @@ interface PromptState {
 export const usePromptStore = create<PromptState>((set) => ({
     currentPrompt: '',
     generatedCode: '',
+    thinkingText: '',
     isStreaming: false,
     error: null,
     showPreview: false,
@@ -28,6 +31,7 @@ export const usePromptStore = create<PromptState>((set) => ({
 
     setCurrentPrompt: (prompt) => set({ currentPrompt: prompt }),
     setGeneratedCode: (code) => set({ generatedCode: code }),
+    setThinkingText: (text) => set({ thinkingText: text }),
     appendChunk: (chunk) =>
         set((state) => ({ generatedCode: state.generatedCode + chunk })),
     setIsStreaming: (isStreaming) => set({ isStreaming }),
@@ -37,6 +41,7 @@ export const usePromptStore = create<PromptState>((set) => ({
     resetGeneration: () =>
         set({
             generatedCode: '',
+            thinkingText: '',
             isStreaming: false,
             error: null,
             showPreview: false,

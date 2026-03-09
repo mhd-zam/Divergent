@@ -101,7 +101,7 @@ export const HistorySidebar: React.FC<HistorySidebarProps> = ({
                             </div>
                         ) : (
                             filteredEntries.map((entry) => (
-                                <button
+                                <div
                                     key={entry.id}
                                     onClick={() => handleEntryClick(entry)}
                                     className="w-full text-left p-3 rounded-lg mb-1
@@ -131,7 +131,7 @@ export const HistorySidebar: React.FC<HistorySidebarProps> = ({
                                             </svg>
                                         </button>
                                     </div>
-                                </button>
+                                </div>
                             ))
                         )}
                     </div>

@@ -6,3 +6,5 @@ export type { CardProps } from './Card';
 
 export { IconButton } from './IconButton';
 export type { IconButtonProps } from './IconButton';
+
+export { ResizablePanels } from './ResizablePanels';
