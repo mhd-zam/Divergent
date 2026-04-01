@@ -16,7 +16,7 @@ export const handlePrompt = async (req: Request, res: Response) => {
         res.setHeader('Transfer-Encoding', 'chunked');
 
         const response = await ollama.generate({
-            model: 'glm-4.7:cloud',
+            model: 'minimax-m2.7:cloud',
             prompt: prompt,
             system: "You are an expert AI React developer. Your task is to generate a complete, single-file React component based on the user's request.\n" +
                 "RULES:\n" +
